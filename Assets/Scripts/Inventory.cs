@@ -42,11 +42,36 @@ public class Inventory : MonoBehaviour
         UIManager.instance.OpenEquipPopup(slots[index].item);
     }
 
+    public void AddItem(ItemData item)
+    {
+        ItemSlot emptySlot = GetEmptySlot();
+
+        if (emptySlot != null)
+        {
+            emptySlot.item = item;
+            UpdateUI();
+            UIManager.instance.UpdateUI();
+        }
+    }
+
+    public ItemSlot GetEmptySlot()
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].item == null)
+            {
+                return slots[i];
+            }
+        }
+
+        return null;
+    }
+
     private void UpdateUI()
     {
         for (int i = 0; i < slots.Length; i++)
         {
-            if (slots[i] != null)
+            if (slots[i].item != null)
             {
                 inventorySlots[i].Set(slots[i]);
             }

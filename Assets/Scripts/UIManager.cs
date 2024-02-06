@@ -17,7 +17,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject optionButtons;
     [SerializeField] private GameObject statusUI;
     [SerializeField] private GameObject inventoryUI;
-    [SerializeField] private GameObject equipPopup; 
+    [SerializeField] private GameObject equipPopup;
+    [SerializeField] private GameObject shopPopup;
     [SerializeField] private GameObject shopUI;
     [SerializeField] private GameObject exitUI;
 
@@ -35,6 +36,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text playerGold;
 
     [SerializeField] private TMP_Text inventoryItemAmount;
+    [SerializeField] private TMP_Text shopPopupText;
 
     private Player _player;
     private EquipPopup _equipPopup;
@@ -84,7 +86,7 @@ public class UIManager : MonoBehaviour
         UpdateUI();
     }
 
-    private void UpdateUI()
+    public void UpdateUI()
     {
         playerName.text = _player.name;
         playerLv.text = $"Lv. {_player.level.ToString()}";
@@ -147,5 +149,16 @@ public class UIManager : MonoBehaviour
     {
         equipPopup.SetActive(true);
         _equipPopup.Set(item);
+    }
+
+    public void ShopBuyPopup(string str)
+    {
+        shopPopup.SetActive(true);
+        shopPopupText.text = str;
+    }
+
+    public void ShopBuyPopupExit()
+    {
+        shopPopup.SetActive(false);
     }
 }

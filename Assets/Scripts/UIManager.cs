@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager instance;
+
     [SerializeField] private TMP_Text playerName;
     [SerializeField] private TMP_Text playerLv;
     [SerializeField] private TMP_Text playerExp;
@@ -15,6 +17,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject optionButtons;
     [SerializeField] private GameObject statusUI;
     [SerializeField] private GameObject inventoryUI;
+    [SerializeField] private GameObject equipPopup; 
     [SerializeField] private GameObject shopUI;
     [SerializeField] private GameObject exitUI;
 
@@ -34,10 +37,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text inventoryItemAmount;
 
     private Player _player;
+    private EquipPopup _equipPopup;
 
     private void Awake()
     {
+        instance = this;
         _player = GameManager.Instance.playerObj.GetComponent<Player>();
+        _equipPopup = equipPopup.GetComponent<EquipPopup>();
 
         statusButton.onClick.AddListener(() => OpenStatus());
         inventoryButton.onClick.AddListener(() => OpenInventory());
@@ -135,5 +141,11 @@ public class UIManager : MonoBehaviour
         inventoryUI.SetActive(false);
         shopUI.SetActive(false);
         exitUI.SetActive(false);
+    }
+
+    public void OpenEquipPopup(ItemData item)
+    {
+        equipPopup.SetActive(true);
+        _equipPopup.Set(item);
     }
 }

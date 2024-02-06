@@ -24,4 +24,5 @@ public class ItemData : ScriptableObject
     public int Def;
     public int Hp;
     public int Crt;
+
 }

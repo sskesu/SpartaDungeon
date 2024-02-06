@@ -41,6 +41,8 @@ public class UIManager : MonoBehaviour
     private Player _player;
     private EquipPopup _equipPopup;
 
+    private int invenCount;
+
     private void Awake()
     {
         instance = this;
@@ -134,6 +136,14 @@ public class UIManager : MonoBehaviour
         }
 
         playerGold.text = _player.gold.ToString("N0");
+
+        invenCount = 0;
+        foreach (var item in Inventory.Instance.slots)
+        {
+            if (item.item != null)
+                invenCount++;
+        }
+        inventoryItemAmount.text = $"{invenCount.ToString()} / {Inventory.Instance.slots.Length}";
     }
 
     public void ClosePopup()

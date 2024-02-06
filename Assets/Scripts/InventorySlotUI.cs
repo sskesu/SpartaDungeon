@@ -1,22 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InventorySlotUI : MonoBehaviour
 {
-    public Button button;
     public Image icon;
     private ItemSlot curSlot;
-    public int index; 
-    public bool equipped; 
+    public int index;
+    public GameObject isEquip;
 
     public void Set(ItemSlot slot)
     {
         curSlot = slot;
         icon.gameObject.SetActive(true);
         icon.sprite = slot.item.icon;
-        
+        if (slot.item.equipped)
+            isEquip.SetActive(true);
+        else
+            isEquip.SetActive(false);
     }
 
     public void Clear()
@@ -27,6 +30,9 @@ public class InventorySlotUI : MonoBehaviour
 
     public void OnClickButton()
     {
-        Inventory.Instance.SelectItem(index);
+        if (curSlot != null)
+        {
+            Inventory.Instance.SelectItem(index);
+        }
     }
 }

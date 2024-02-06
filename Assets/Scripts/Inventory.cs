@@ -36,9 +36,6 @@ public class Inventory : MonoBehaviour
 
     public void SelectItem(int index)
     {
-        if (slots[index] == null)
-            return;
-        //Àåºñ ÆË¾÷
         UIManager.instance.OpenEquipPopup(slots[index].item);
     }
 
@@ -65,6 +62,32 @@ public class Inventory : MonoBehaviour
         }
 
         return null;
+    }
+
+    public void Equip(ItemData item)
+    {
+        
+        if (!item.equipped)
+        {
+            UnEquip(item.type);
+            item.equipped = true;
+        }
+        else
+            item.equipped = false;
+        player.UpdateStats();
+        UpdateUI();
+        UIManager.instance.UpdateUI();
+    }
+
+    public void UnEquip(ItemType type)
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].item != null && slots[i].item.type == type)
+            {
+                slots[i].item.equipped = false;
+            }
+        }
     }
 
     private void UpdateUI()

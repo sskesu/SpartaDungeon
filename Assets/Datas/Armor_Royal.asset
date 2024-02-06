@@ -21,3 +21,4 @@ MonoBehaviour:
   Def: 30
   Hp: 0
   Crt: 0
+  equipped: 1

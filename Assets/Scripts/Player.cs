@@ -51,12 +51,26 @@ public class Player : MonoBehaviour
         UpdateStats();
     }
 
-    private void UpdateStats()
+    public void UpdateStats()
     {
         currentAtk = baseAtk;
         currentDef = baseDef;
         currentHp = baseHp;
         currentCrt = baseCrt;
+
+        foreach (var item in Inventory.Instance.slots)
+        {
+            if (item.item != null)
+            {
+                if (item.item.equipped)
+                {
+                    currentAtk += item.item.Atk;
+                    currentDef += item.item.Def;
+                    currentHp += item.item.Hp;
+                    currentCrt += item.item.Crt;
+                }
+            }
+        }
     }
 
     private void SetRequiredExp()

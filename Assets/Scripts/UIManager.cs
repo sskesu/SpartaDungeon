@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject optionButtons;
     [SerializeField] private GameObject statusUI;
     [SerializeField] private GameObject inventoryUI;
+    [SerializeField] private GameObject shopUI;
     [SerializeField] private GameObject exitUI;
 
     [SerializeField] private Button statusButton;
@@ -40,6 +41,7 @@ public class UIManager : MonoBehaviour
 
         statusButton.onClick.AddListener(() => OpenStatus());
         inventoryButton.onClick.AddListener(() => OpenInventory());
+        shopButton.onClick.AddListener(() => OpenShop());
         raidButton.onClick.AddListener(() => PlayRaid());
         exitButton.onClick.AddListener(() => ClosePopup());
     }
@@ -62,6 +64,11 @@ public class UIManager : MonoBehaviour
         optionButtons.SetActive(false);
         inventoryUI.SetActive(true);
         exitUI.SetActive(true);
+    }
+
+    private void OpenShop()
+    {
+        shopUI.SetActive(true);
     }
 
     private void PlayRaid()
@@ -121,11 +128,12 @@ public class UIManager : MonoBehaviour
         playerGold.text = _player.gold.ToString("N0");
     }
 
-    private void ClosePopup()
+    public void ClosePopup()
     {
         optionButtons.SetActive(true);
         statusUI.SetActive(false);
         inventoryUI.SetActive(false);
+        shopUI.SetActive(false);
         exitUI.SetActive(false);
     }
 }
